@@ -2,7 +2,6 @@ import Bunner from './components/Home/Banner/Bunner';
 import CardLists from './components/Home/CardLists/CardLists';
 import Promo from './components/Home/Promo/Promo';
 
-
 import getGamesByCategory from './utils/data-utils';
 
 export default function Page() {
@@ -12,16 +11,24 @@ export default function Page() {
 	return (
 		<main className="main">
 			<Bunner />
-			<CardLists
-				id="popular"
-				title="Популярные"
-				data={popularGames}
-			/>
-			<CardLists
-				id="new"
-				title="Новые"
-				data={newGames}
-			/>
+			{popularGames && newGames ? (
+				<>
+					<CardLists
+						id="popular"
+						title="Популярные"
+						data={popularGames}
+						type="slider"
+					/>
+					<CardLists
+						id="new"
+						title="Новинки"
+						data={newGames}
+						
+					/>
+				</>
+			) : (
+				<Preloader />
+			)}
 			<Promo />
 		</main>
 	);

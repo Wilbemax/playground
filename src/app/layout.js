@@ -1,7 +1,6 @@
 import './globals.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Page from './page';
 
 export const metadata = {
 	title: 'Pindie',
@@ -19,7 +18,6 @@ export default function RootLayout({ children }) {
 		<html lang="ru">
 			<body>
 				<Header />
-				<Page />
 				{children}
 				<Footer />
 			</body>

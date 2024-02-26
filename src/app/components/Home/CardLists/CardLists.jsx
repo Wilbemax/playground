@@ -1,5 +1,6 @@
 import classe from './CardLists.module.css';
 import Card from './Card/Card';
+import Link from 'next/link';
 
 export default function CardLists({ data, title }) {
 	
@@ -9,7 +10,9 @@ export default function CardLists({ data, title }) {
 			<ul className={classe.list}>
 				{data.map((item) => (
 					<li key={item.id}>
-						<Card {...item} />
+						<Link href={`/pages/games/${item.id}`}>
+							<Card {...item} />
+						</Link>
 					</li>
 				))}
 			</ul>

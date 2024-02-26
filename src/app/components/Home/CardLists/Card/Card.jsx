@@ -9,7 +9,7 @@ export default function Card({
 }) {
 	return (
 		<article className={classe.card}>
-			<a href={link}>
+			
 				<img
 					src={`${image}`}
 					alt=""
@@ -28,7 +28,7 @@ export default function Card({
 						</p>
 					</div>
 				</div>
-			</a>
+			
 		</article>
 	);
 }

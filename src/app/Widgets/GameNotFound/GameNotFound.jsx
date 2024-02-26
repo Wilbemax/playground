@@ -1,5 +1,5 @@
 import Styles from './GameNotFound.module.css';
-import {NotFoundImage} from './not-found.jsx';
+import {NotFoundImage} from './NotFoundImage.jsx';
 
 export const GameNotFound = () => {
   return (

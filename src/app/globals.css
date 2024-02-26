@@ -77,6 +77,9 @@ button {
 .main {
 	overflow: hidden;
 }
+.main-inner {
+	padding-top: 20px;
+  }
 
 @media (width <= 1728px) {
 	body {
