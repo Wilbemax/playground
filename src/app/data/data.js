@@ -280,3 +280,36 @@ export const data = [
       ],
     },
   ];
+
+export const menuItems = [
+  {
+    id: 'new-items',
+    linkText: 'Новинки',
+    linkHref: ''
+  },
+  {
+    id: 'popular',
+    linkText: 'Популярные',
+    linkHref: ''
+  },
+  {
+    id: 'shooters',
+    linkText: 'Шутеры',
+    linkHref: ''
+  },
+  {
+    id: 'runners',
+    linkText: 'Ранеры',
+    linkHref: ''
+  },
+  {
+    id: 'pixel',
+    linkText: 'Пиксельные',
+    linkHref: ''
+  },
+  {
+    id: 'tds',
+    linkText: 'TDS',
+    linkHref: ''
+  }
+];
