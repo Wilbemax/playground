@@ -16,13 +16,15 @@ export default function Header() {
 	const [popupIsOpened, setPopupIsOpened] = useState(false);
 
 	function openPopup() {
-		console.log('openPopup called');
 		setPopupIsOpened(true);
 	}
 	function closePopup() {
-		console.log('closePopup called');
 		setPopupIsOpened(false);
 	}
+	// я бы сделал так --->
+	// function popup(){
+	// 	setPopupIsOpened(!popupIsOpened)
+	// }
 	return (
 		<header className={classe.header}>
 			{pathname === '/' ? (

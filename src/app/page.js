@@ -17,7 +17,7 @@ export default function Page() {
 						id="popular"
 						title="Популярные"
 						data={popularGames}
-						type="slider"
+						
 					/>
 					<CardLists
 						id="new"

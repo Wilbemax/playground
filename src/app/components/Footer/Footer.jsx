@@ -1,14 +1,23 @@
+"use client"
+import Link from 'next/link';
 import classe from './Footer.module.css';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+	const pathName = usePathname()
 	return (
 		<footer className={classe.footer}>
-			<a
-				href="./index.html"
+			{pathName === '/' ? (<span
 				className={classe.logo}>
 				<span className={classe.logo_name}>pindie</span>
 				<span className={classe.logo_copy}>, XXI век</span>
-			</a>
+			</span>) : (<Link
+				href="/"
+				className={classe.logo}>
+				<span className={classe.logo_name}>pindie</span>
+				<span className={classe.logo_copy}>, XXI век</span>
+			</Link>) }
+			
 			<ul className={classe.list}>
 				<li className={classe.item}>
 					<a

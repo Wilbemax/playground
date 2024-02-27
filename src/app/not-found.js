@@ -1,10 +1,10 @@
-import { NotFoundImage } from '@/app/Widgets/GameNotFound/NotFoundImage';
+import { PageNotFound } from './Widgets/GameNotFound/GameNotFound';
 
 export default function Not() {
 	console.log('Not called');
 	return (
 		<main className="main-inner">
-			<NotFoundImage />
+			<PageNotFound />
 		</main>
 	);
 }

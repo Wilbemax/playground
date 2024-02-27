@@ -78,8 +78,12 @@ button {
 	overflow: hidden;
 }
 .main-inner {
+	height: 90vh;
 	padding-top: 20px;
-  }
+}
+img {
+	pointer-events: none;
+}
 
 @media (width <= 1728px) {
 	body {

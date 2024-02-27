@@ -9,5 +9,5 @@ export default getGamesByCategory;
 
 export const getGamesById = (id) => {
 	debugger;
-	return data.find((game) => game.id === id);
+	return data.find((game) => game.id === +id);
 };

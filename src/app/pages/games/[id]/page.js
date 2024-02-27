@@ -3,10 +3,12 @@ import { GameNotFound } from '@/app/Widgets/GameNotFound/GameNotFound';
 
 import Styles from './Game.module.css';
 import { getGamesById } from '@/app/utils/data-utils';
+import { useRouter } from 'next/navigation';
 
 export default function GamePage({ params }) {
 	const game = getGamesById(params.id);
-	// debugger;
+	const rout = useRouter();
+
 	return (
 		<main className="main">
 			{game ? (
@@ -36,10 +38,11 @@ export default function GamePage({ params }) {
 									{game.users.length}
 								</span>
 							</p>
+
 							<button
-								className={`button ${Styles['about__vote-button']}`}
-								>
-								{isVoted ? 'Голос учтён' : 'Голосовать'}
+								onClick={() => rout.push('/pages/login')}
+								className={`button ${Styles['about__vote-button']}`}>
+								проголосовать
 							</button>
 						</div>
 					</section>

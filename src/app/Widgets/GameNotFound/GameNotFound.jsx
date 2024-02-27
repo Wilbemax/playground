@@ -9,3 +9,11 @@ export const GameNotFound = () => {
     </div>
   )
 };
+export const PageNotFound = () => {
+  return (
+    <div className={Styles["not-found"]}>
+      <NotFoundImage />
+      <h2 className={Styles["not-found__text"]}>Такой страницы мы не планировали :(</h2>
+    </div>
+  )
+};
