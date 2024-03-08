@@ -11,7 +11,7 @@ import { Popup } from '@/app/Widgets/Popup/Popup';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { authorize } from '@/app/utils/api/api-utils';
+import {  getJWT, getMe, isResponseOk, removeJWT } from '@/app/utils/api/api-utils';
 import { endpoints } from '@/app/utils/api/config';
 
 export default function Header() {
@@ -19,21 +19,33 @@ export default function Header() {
 	const [isAuth, setIsAuth] = useState(false);
 	const [popupIsOpened, setPopupIsOpened] = useState(false);
 
-	useEffect(() => {
-		authorize(endpoints.auth, {
-			identifier: 'aski@example.com',
-			password: 'ilovehtml',
-		})
-			.then((res) => console.log(res))
-			.catch((e) => console.log(e));
-	}, []);
-
 	function openPopup() {
 		setPopupIsOpened(true);
 	}
 	function closePopup() {
 		setPopupIsOpened(false);
 	}
+
+	const handleLogout = () => {
+		removeJWT();
+		setIsAuth(false)
+	}
+	useEffect(()=>{
+		const handleAuth = async (jwt) => {
+			const userData = await getMe(endpoints.me, jwt)
+
+			if(isResponseOk(userData)){
+				setIsAuth(true)
+			} else {
+				setIsAuth(false)
+				removeJWT()
+			}
+			const token = getJWT()
+			if (token){
+				handleAuth(token)
+			}
+		}
+	}, [])
 
 	return (
 		<header className={classe.header}>
@@ -66,13 +78,19 @@ export default function Header() {
 						</li>
 					))}
 				</ul>
-				<div className={classe.auth}>
+				{isAuth ? <div className={classe.auth}>
 					<button
 						onClick={openPopup}
 						className={classe.auth__button}>
 						Войти
 					</button>
-				</div>
+				</div> : <div className={classe.auth}>
+					<button
+						onClick={handleLogout}
+						className={classe.auth__button}>
+						Выйти
+					</button>
+				</div>}
 			</nav>
 			{popupIsOpened && (
 				<>
