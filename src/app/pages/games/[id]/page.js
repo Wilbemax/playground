@@ -2,7 +2,7 @@
 import { GameNotFound } from '@/app/Widgets/GameNotFound/GameNotFound';
 
 import Styles from './Game.module.css';
-import { getGamesById } from '@/app/utils/data-utils';
+import { getGamesById } from '@/app/utils/data/data-utils';
 import { useRouter } from 'next/navigation';
 
 export default function GamePage({ params }) {
