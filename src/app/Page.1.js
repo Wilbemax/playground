@@ -2,12 +2,13 @@ import Bunner from './components/Home/Banner/Bunner';
 import CardLists from './components/Home/CardLists/CardLists';
 import Promo from './components/Home/Promo/Promo';
 import { useGetDataByCategory } from './hooks/api-hook';
-import endpoints from '@/app/utils/api/config'
+
+
 
 
 export default function Page() {
 	const popularGames = useGetDataByCategory(endpoints.games, "popular");
-  	const newGames = useGetDataByCategory(endpoints.games, "new");
+	const newGames = useGetDataByCategory(endpoints.games, "new");
 
 	return (
 		<main className="main">
@@ -17,15 +18,11 @@ export default function Page() {
 					<CardLists
 						id="popular"
 						title="Популярные"
-						data={popularGames}
-						
-					/>
+						data={popularGames} />
 					<CardLists
 						id="new"
 						title="Новинки"
-						data={newGames}
-						
-					/>
+						data={newGames} />
 				</>
 			) : (
 				<Preloader />
