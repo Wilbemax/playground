@@ -1,5 +1,5 @@
 'use client';
-import { authorize, isResponseOk } from '@/app/utils/api/api-utils';
+import {authorize, isResponseOk, setJWT} from '@/app/utils/api/api-utils';
 import Styles from './AuthForm.module.css';
 import { useState, useEffect } from 'react';
 import { endpoints } from '@/app/utils/api/config';
@@ -19,11 +19,11 @@ export const AuthForm = ({ close, setAuth }) => {
 
 		const userData = await authorize(endpoints.auth, authData);
 
-		if (isResponseOk(userData)) {
+		if (await isResponseOk(userData)) {
 			setUserData(userData);
 
 			setAuth(true);
-
+			setJWT(userData.jwt) //добавил сохранение jwt, что было упущенно
 			setMessage({ status: 'success', text: 'Вы авторизовались!' });
 		} else {
 			setMessage({ status: 'error', text: 'Неверные почта или пароль' });
@@ -52,6 +52,7 @@ export const AuthForm = ({ close, setAuth }) => {
 						onInput={handleInput}
 						className={Styles['form__field-input']}
 						type="email"
+						name="identifier"
 						placeholder="hello@world.com"
 					/>
 				</label>
@@ -61,6 +62,7 @@ export const AuthForm = ({ close, setAuth }) => {
 						onInput={handleInput}
 						className={Styles['form__field-input']}
 						type="password"
+						name="password"
 						placeholder="***********"
 					/>
 				</label>

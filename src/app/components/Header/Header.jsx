@@ -21,9 +21,8 @@ import { endpoints } from '@/app/utils/api/config';
 
 export default function Header() {
 	const pathname = usePathname();
-	const [isAuth, setIsAuth] = useState(false);
+	const [isAuth, setIsAuth] = useState(true);
 	const [popupIsOpened, setPopupIsOpened] = useState(false);
-
 	function openPopup() {
 		setPopupIsOpened(true);
 	}
@@ -32,26 +31,37 @@ export default function Header() {
 	}
 
 	const handleLogout = () => {
-		debugger;
 		removeJWT();
 		setIsAuth(false);
 	};
+
 	useEffect(() => {
 		const handleAuth = async (jwt) => {
 			const userData = await getMe(endpoints.me, jwt);
 
-			if (isResponseOk(userData)) {
+			if (await isResponseOk(userData)) {
 				setIsAuth(true);
 			} else {
 				setIsAuth(false);
 				removeJWT();
 			}
-			const token = getJWT();
-			if (token) {
-				handleAuth(token);
-			}
 		};
-	}, [isAuth]);
+
+		// Получаем JWT
+		const token = getJWT();
+		if (token) {
+			// Вызываем handleAuth с полученным JWT
+			handleAuth(token);
+		} else {
+			// Если JWT не найден, устанавливаем isAuth в false   ---------------- исправленно
+			setIsAuth(false);
+		}
+
+	}, []);
+
+
+
+
 
 	return (
 		<header className={classe.header}>

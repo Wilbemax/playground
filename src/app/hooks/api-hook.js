@@ -1,18 +1,19 @@
 "use client"
 
-///не используеться(пока что)
+import {useEffect, useState} from 'react'
+import {normalizeDataByCategory} from "@/app/utils/api/api-utils";
 
-import { useEffect, useState } from 'react';
-import { getNormalizedGamesDataByCategory } from '../utils/api/api-utils';
 
-export const useGetDataByCategory = (endpoint, category) => {
-	const [data, setData] = useState(null);
-	useEffect(() => {
-		async function fetchData() {
-			const data = await getNormalizedGamesDataByCategory(endpoint, category);
-			setData(data);
-		}
-		fetchData();
-	}, []);
-	return data;
-};
+const useGetDataByCategory = (endpoint, category) => {
+    const [data, setData] = useState(null)
+    useEffect(() => {
+        async function fetchData() {
+            const data = await normalizeDataByCategory(endpoint, category)
+            setData(data)
+        }
+
+        fetchData()
+    }, [])
+    return data
+}
+export default useGetDataByCategory;

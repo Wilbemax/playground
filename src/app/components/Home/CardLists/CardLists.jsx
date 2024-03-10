@@ -1,3 +1,5 @@
+"use client"
+
 import classe from './CardLists.module.css';
 import Card from './Card/Card';
 import Link from 'next/link';

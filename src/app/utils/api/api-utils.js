@@ -30,7 +30,7 @@ export const normalizeData = (data) => {
 
 export const normalizeDataById = async (url, id) => {
 	const data = await getData(`${url}/${id}`);
-	return isResponseOk(data) ? normalizeDataObject(data) : data;
+	return await isResponseOk(data) ? normalizeDataObject(data) : data;
 };
 
 export const normalizeDataByCategory = async (url, category) => {
@@ -39,7 +39,7 @@ export const normalizeDataByCategory = async (url, category) => {
 		if (!data.length) {
 			throw new Error('Нет игр в категории');
 		}
-		return isResponseOk(data) ? normalizeData(data) : data;
+		return await isResponseOk(data) ? normalizeData(data) : data;
 	} catch (e) {
 		console.log(e);
 		return null;
@@ -64,7 +64,7 @@ export const authorize = async (url, data) => {
 
 export const setJWT = (jwt) => {
 	document.cookie = `jwt=${jwt}`;
-	localStorage.setItem = ('jwt', jwt);
+	localStorage.setItem('jwt', `${jwt}`) // Исправлено
 };
 
 export const getJWT = () => {
@@ -75,9 +75,8 @@ export const getJWT = () => {
 	return jwt ? jwt.split('=')[1] : null;
 };
 
-export const removeJWT = (jwt) => {
-	document.cookie = `jwt=;`;
-	localStorage.removeItem = 'jwt';
+export const removeJWT = () => {
+	localStorage.removeItem('jwt')
 };
 
 export const getMe = async (url, jwt) => {
@@ -97,6 +96,7 @@ export const getMe = async (url, jwt) => {
 };
 
 export const checkIfUserVoted = (game, userID) => {
+
 	return game.users.find((user) => user.id === userID);
 };
 
