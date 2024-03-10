@@ -53,7 +53,6 @@ export default function Header() {
 		};
 	}, [isAuth]);
 
-	console.log(isAuth);
 	return (
 		<header className={classe.header}>
 			{pathname === '/' ? (
