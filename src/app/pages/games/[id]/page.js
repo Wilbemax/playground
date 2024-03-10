@@ -1,6 +1,11 @@
-"use client"
+'use client';
 
 import Styles from './Game.module.css';
+import { useState, useEffect } from 'react';
+import { Preloader } from '@/app/Widgets/Preloader/Preloader';
+import { GameNotFound } from '@/app/Widgets/GameNotFound/GameNotFound';
+import { normalizeDataById, isResponseOk } from '@/app/utils/api/api-utils';
+import { endpoints } from '@/app/utils/api/config';
 
 export default function GamePage(props) {
 	const [game, setGame] = useState(null);
@@ -9,10 +14,7 @@ export default function GamePage(props) {
 
 	useEffect(() => {
 		async function fetchData() {
-			const game = await getNormalizedGameDataById(
-				endpoints.games,
-				props.params.id
-			);
+			const game = await normalizeDataById(endpoints.games, props.params.id);
 			isResponseOk(game) ? setGame(game) : setGame(null);
 			setPreloaderVisible(false);
 		}
@@ -20,10 +22,22 @@ export default function GamePage(props) {
 	}, []);
 
 	useEffect(() => {
-		authContext.user && game
-			? setIsVoted(checkIfUserVoted(game, authContext.user.id))
-			: setIsVoted(false);
-	}, [authContext.user, game]);
+		const handleAuth = async (jwt) => {
+			const userData = await getMe(endpoints.me, jwt);
+
+			if (isResponseOk(userData)) {
+				setIsVoted(true);
+			} else {
+				setIsAuth(false);
+				setIsVoted();
+			}
+			const token = getJWT();
+			if (token) {
+				handleAuth(token);
+			}
+		};
+	}, []);
+
 	return (
 		<main className="main">
 			{game ? (

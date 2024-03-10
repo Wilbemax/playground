@@ -1,3 +1,7 @@
+"use client"
+
+///не используеться(пока что)
+
 import { useEffect, useState } from 'react';
 import { getNormalizedGamesDataByCategory } from '../utils/api/api-utils';
 

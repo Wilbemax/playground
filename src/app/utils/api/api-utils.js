@@ -1,3 +1,4 @@
+
 export const getData = async (url) => {
 	try {
 		const response = await fetch(url);
@@ -22,13 +23,14 @@ export const normalizeDataObject = (obj) => {
 	};
 };
 
-export const normalizeData = async (data) => {
-	return data?.map((item) => normalizeDataObject(item));
+export const normalizeData = (data) => {
+	console.log(data);
+	return data.map((item) => normalizeDataObject(item));
 };
 
 export const normalizeDataById = async (url, id) => {
-	const data = getData(`${url}/${id}`);
-	return isResponseOk(data) ? normalizeData(data) : data;
+	const data = await getData(`${url}/${id}`);
+	return isResponseOk(data) ? normalizeDataObject(data) : data;
 };
 
 export const normalizeDataByCategory = async (url, category) => {
@@ -44,21 +46,21 @@ export const normalizeDataByCategory = async (url, category) => {
 	}
 };
 export const authorize = async (url, data) => {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-    if (response.status !== 200) {
-      throw new Error('Ошибка авторизации')
-    }
-    const result = await response.json()
-    return result
-  } catch (error) {
-    return error
-  }
-}
+	try {
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data),
+		});
+		if (response.status !== 200) {
+			throw new Error('Ошибка авторизации');
+		}
+		const result = await response.json();
+		return result;
+	} catch (error) {
+		return error;
+	}
+};
 
 export const setJWT = (jwt) => {
 	document.cookie = `jwt=${jwt}`;

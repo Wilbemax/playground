@@ -1,13 +1,12 @@
-import Bunner from './components/Home/Banner/Bunner';
-import CardLists from './components/Home/CardLists/CardLists';
-import Promo from './components/Home/Promo/Promo';
-import { useGetDataByCategory } from './hooks/api-hook';
-import endpoints from '@/app/utils/api/config'
+import Bunner from '@/app/components/Home/Banner/Bunner';
+import CardLists from '@/app/components/Home/CardLists/CardLists';
+import Promo from '@/app/components/Home/Promo/Promo';
+import getGamesByCategory from '@/app/utils/data/data-utils';
 
 
 export default function Page() {
-	const popularGames = useGetDataByCategory(endpoints.games, "popular");
-  	const newGames = useGetDataByCategory(endpoints.games, "new");
+	const popularGames = getGamesByCategory( "popular");
+  	const newGames = getGamesByCategory("new");
 
 	return (
 		<main className="main">

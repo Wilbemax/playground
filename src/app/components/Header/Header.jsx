@@ -11,7 +11,12 @@ import { Popup } from '@/app/Widgets/Popup/Popup';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import {  getJWT, getMe, isResponseOk, removeJWT } from '@/app/utils/api/api-utils';
+import {
+	getJWT,
+	getMe,
+	isResponseOk,
+	removeJWT,
+} from '@/app/utils/api/api-utils';
 import { endpoints } from '@/app/utils/api/config';
 
 export default function Header() {
@@ -27,26 +32,28 @@ export default function Header() {
 	}
 
 	const handleLogout = () => {
+		debugger;
 		removeJWT();
-		setIsAuth(false)
-	}
-	useEffect(()=>{
+		setIsAuth(false);
+	};
+	useEffect(() => {
 		const handleAuth = async (jwt) => {
-			const userData = await getMe(endpoints.me, jwt)
+			const userData = await getMe(endpoints.me, jwt);
 
-			if(isResponseOk(userData)){
-				setIsAuth(true)
+			if (isResponseOk(userData)) {
+				setIsAuth(true);
 			} else {
-				setIsAuth(false)
-				removeJWT()
+				setIsAuth(false);
+				removeJWT();
 			}
-			const token = getJWT()
-			if (token){
-				handleAuth(token)
+			const token = getJWT();
+			if (token) {
+				handleAuth(token);
 			}
-		}
-	}, [])
+		};
+	}, [isAuth]);
 
+	console.log(isAuth);
 	return (
 		<header className={classe.header}>
 			{pathname === '/' ? (
@@ -78,19 +85,23 @@ export default function Header() {
 						</li>
 					))}
 				</ul>
-				{isAuth ? <div className={classe.auth}>
-					<button
-						onClick={openPopup}
-						className={classe.auth__button}>
-						Войти
-					</button>
-				</div> : <div className={classe.auth}>
-					<button
-						onClick={handleLogout}
-						className={classe.auth__button}>
-						Выйти
-					</button>
-				</div>}
+				{isAuth ? (
+					<div className={classe.auth}>
+						<button
+							onClick={handleLogout}
+							className={classe.auth__button}>
+							Выйти
+						</button>
+					</div>
+				) : (
+					<div className={classe.auth}>
+						<button
+							onClick={openPopup}
+							className={classe.auth__button}>
+							Войти
+						</button>
+					</div>
+				)}
 			</nav>
 			{popupIsOpened && (
 				<>

@@ -1,4 +1,4 @@
-import { PageNotFound } from './Widgets/GameNotFound/GameNotFound';
+import { PageNotFound } from "@/app/Widgets/GameNotFound/GameNotFound";
 
 export default function Not() {
 	console.log('Not called');
