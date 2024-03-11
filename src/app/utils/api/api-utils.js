@@ -96,7 +96,6 @@ export const getMe = async (url, jwt) => {
 };
 
 export const checkIfUserVoted = (game, userID) => {
-
 	return game.users.find((user) => user.id === userID);
 };
 

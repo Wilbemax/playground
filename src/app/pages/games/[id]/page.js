@@ -43,7 +43,7 @@ export default function GamePage(props) {
                 }
 
                 if (game && userData.id) {
-                    setIsVoted(checkIfUserVoted(game, userData.id));
+                    setIsVoted(await checkIfUserVoted(game, userData.id));
 
                 }
             } catch (error) {
@@ -87,6 +87,7 @@ export default function GamePage(props) {
                 };/**/
             });
         }
+        setDisabled(true)
     };
 
     console.log("isVoted", isVoted)
