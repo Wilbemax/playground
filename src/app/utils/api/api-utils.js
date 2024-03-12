@@ -62,21 +62,34 @@ export const authorize = async (url, data) => {
 	}
 };
 
+// export const setJWT = (jwt) => {
+// 	document.cookie = `jwt=${jwt}`;
+// 	localStorage.setItem('jwt', `${jwt}`) // Исправлено
+// };
+//
+// export const getJWT = () => {
+// 	if (document.cookie === '') {
+// 		return localStorage.getItem('jwt');
+// 	}
+// 	const jwt = document.cookie.split(';').find((item) => item.includes('jwt'));
+// 	return jwt ? jwt.split('=')[1] : null;
+// };
+//
+// export const removeJWT = () => {
+// 	localStorage.removeItem('jwt')
+// };
+
+
 export const setJWT = (jwt) => {
-	document.cookie = `jwt=${jwt}`;
-	localStorage.setItem('jwt', `${jwt}`) // Исправлено
+	localStorage.setItem("jwt", jwt);
 };
 
 export const getJWT = () => {
-	if (document.cookie === '') {
-		return localStorage.getItem('jwt');
-	}
-	const jwt = document.cookie.split(';').find((item) => item.includes('jwt'));
-	return jwt ? jwt.split('=')[1] : null;
+	return localStorage.getItem("jwt");
 };
 
 export const removeJWT = () => {
-	localStorage.removeItem('jwt')
+	localStorage.removeItem("jwt");
 };
 
 export const getMe = async (url, jwt) => {
