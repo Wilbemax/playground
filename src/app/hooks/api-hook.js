@@ -1,4 +1,4 @@
-"use client"
+
 
 import {useEffect, useState} from 'react'
 import {normalizeDataByCategory} from "@/app/utils/api/api-utils";
