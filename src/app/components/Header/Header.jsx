@@ -18,11 +18,15 @@ import {
 	removeJWT,
 } from '@/app/utils/api/api-utils';
 import { endpoints } from '@/app/utils/api/config';
+import {useStore} from "@/app/store/app-store";
 
 export default function Header() {
 	const pathname = usePathname();
 	const [isAuth, setIsAuth] = useState(true);
 	const [popupIsOpened, setPopupIsOpened] = useState(false);
+
+	const authContext = useStore()
+
 	function openPopup() {
 		setPopupIsOpened(true);
 	}
@@ -31,33 +35,8 @@ export default function Header() {
 	}
 
 	const handleLogout = () => {
-		removeJWT();
-		setIsAuth(false);
+		authContext.logout()
 	};
-
-	useEffect(() => {
-		const handleAuth = async (jwt) => {
-			const userData = await getMe(endpoints.me, jwt);
-
-			if (await isResponseOk(userData)) {
-				setIsAuth(true);
-			} else {
-				setIsAuth(false);
-				removeJWT();
-			}
-		};
-
-		// Получаем JWT
-		const token = getJWT();
-		if (token) {
-			// Вызываем handleAuth с полученным JWT
-			handleAuth(token);
-		} else {
-			// Если JWT не найден, устанавливаем isAuth в false   ---------------- исправленно
-			setIsAuth(false);
-		}
-
-	}, []);
 
 
 
@@ -94,7 +73,7 @@ export default function Header() {
 						</li>
 					))}
 				</ul>
-				{isAuth ? (
+				{authContext.isAuth ? (
 					<div className={classe.auth}>
 						<button
 							onClick={handleLogout}

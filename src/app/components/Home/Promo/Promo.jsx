@@ -24,7 +24,7 @@ export default function Promo(props) {
 					onClick={hendleClick}
 					className={`button ${classe.button}`}>
 					{!codeIsVisible && <span>твой промокод</span>}
-					{codeIsVisible && <span>TEENS 10</span>}
+					{codeIsVisible && <span>WEBTEENS10</span>}
 				</button>
 			</div>
 			<img
